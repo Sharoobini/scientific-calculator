@@ -1,0 +1,144 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: #101827;
+    font-family: Arial, sans-serif;
+}
+
+.calculator {
+    width: 100%;
+    max-width: 430px;
+    background: #1c293b;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.small-title {
+    color: #8ba2c3;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 7px;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+.mode-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background: #34465f;
+    color: white;
+    cursor: pointer;
+}
+
+.screen {
+    background: #101827;
+    padding: 20px;
+    border-radius: 12px;
+    min-height: 100px;
+    margin-bottom: 20px;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.expression {
+    color: #aebcd0;
+    font-size: 18px;
+    min-height: 28px;
+}
+
+.result {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 9px;
+}
+
+.key {
+    min-width: 0;
+    height: 55px;
+    border: none;
+    border-radius: 10px;
+    background: #34465f;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.key:hover {
+    background: #506680;
+}
+
+.function {
+    color: #72c7ff;
+}
+
+.operator {
+    background: #435b7b;
+    color: white;
+}
+
+.utility {
+    background: #a64d56;
+}
+
+.equals {
+    background: #168c78;
+    color: white;
+    font-weight: bold;
+    grid-column: span 1;
+}
+
+.zero {
+    grid-column: span 1;
+}
+
+.hint {
+    text-align: center;
+    color: #8294ad;
+    font-size: 11px;
+    margin-top: 18px;
+}
+
+@media (max-width: 400px) {
+    .calculator {
+        padding: 15px;
+    }
+
+    .key {
+        height: 48px;
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 17px;
+    }
+}
