@@ -18,6 +18,7 @@
 
 <!-- Your JavaScript -->
 <script src="script.js" defer></script>
+<script src="extra-features.js" defer></script>
 </head>
 
 <body>
@@ -44,8 +45,50 @@
         <section class="screen">
             <div id="expression" class="expression">0</div>
             <div id="result" class="result">Ready</div>
+            <button id="copyAnswer" type="button">
+    
+</button>
+
+<p id="copyStatus"></p>
         </section>
 
+        <!-- Calculator Memory -->
+
+<section class="memory-panel">
+
+    <h2>Calculator Memory</h2>
+
+    <div class="memory-controls">
+
+        <button data-memory="clear">MC</button>
+
+        <button data-memory="recall">MR</button>
+
+        <button data-memory="add">M+</button>
+
+        <button data-memory="subtract">M-</button>
+
+    </div>
+
+    <p id="memoryStatus">Memory: 0</p>
+
+</section>
+
+<!-- Step by Step Solution -->
+
+<section class="steps-panel">
+
+    <h2>Step-by-Step Solution</h2>
+
+    <button id="showSteps" type="button">
+        Explain Last Calculation
+    </button>
+
+    <ol id="stepsList">
+        <li>No calculation selected.</li>
+    </ol>
+
+</section>
         <section class="keypad" id="keypad">
 
             <button class="key utility" data-action="clear">AC</button>
@@ -127,9 +170,136 @@
 
 </section>
 
+<!-- Multiple Graphs -->
+
+<section class="multi-graph-panel">
+
+    <h2>Multiple Graph Comparison</h2>
+
+    <p>Enter one equation per line.</p>
+
+    <textarea
+        id="multiGraphExpressions"
+        rows="4"
+        placeholder="x^2&#10;sin(x)&#10;cos(x)"
+    >x^2
+sin(x)
+cos(x)</textarea>
+
+    <button id="drawMultipleGraphs" type="button">
+        Compare Graphs
+    </button>
+
+    <div id="multipleGraphCanvas"></div>
+
+    <p id="multiGraphMessage"></p>
+
+</section>
+
+<!-- Unit Converter -->
+
+<section class="converter-panel">
+
+    <h2>Unit Converter</h2>
+
+    <label for="unitCategory">Category</label>
+
+    <select id="unitCategory">
+        <option value="length">Length</option>
+        <option value="mass">Weight / Mass</option>
+        <option value="temperature">Temperature</option>
+    </select>
+
+    <label for="unitInput">Enter Value</label>
+
+    <input
+        type="number"
+        id="unitInput"
+        placeholder="Enter value"
+    >
+
+    <label for="fromUnit">From</label>
+    <select id="fromUnit"></select>
+
+    <label for="toUnit">To</label>
+    <select id="toUnit"></select>
+
+    <button id="convertUnit" type="button">
+        Convert
+    </button>
+
+    <p id="unitResult">Result will appear here.</p>
+
+</section>
+
+<!-- Equation Solver -->
+
+<section class="equation-panel">
+
+    <h2>Equation Solver</h2>
+
+    <p>Solve ax² + bx + c = 0</p>
+
+    <label for="coefA">Value of A</label>
+    <input type="number" id="coefA" value="1" step="any">
+
+    <label for="coefB">Value of B</label>
+    <input type="number" id="coefB" value="-5" step="any">
+
+    <label for="coefC">Value of C</label>
+    <input type="number" id="coefC" value="6" step="any">
+
+    <button id="solveEquation" type="button">
+        Solve Equation
+    </button>
+
+    <div id="equationResult">
+        Solution will appear here.
+    </div>
+
+</section>
+
+<!-- Statistics Calculator -->
+
+<section class="statistics-panel">
+
+    <h2>Statistics Calculator</h2>
+
+    <p>Enter numbers separated by commas.</p>
+
+    <textarea
+        id="statisticsInput"
+        rows="3"
+        placeholder="Example: 10, 20, 30, 40, 50"
+    ></textarea>
+
+    <button id="calculateStatistics" type="button">
+        Calculate Statistics
+    </button>
+
+    <div id="statisticsResult">
+        Results will appear here.
+    </div>
+
+</section>
+
         <p class="hint">
             Scientific Calculator | DEG / RAD
         </p>
+ <div class="memory-status" id="memoryStatus">Memory: 0</div>
+        <!-- Keyboard Shortcuts -->
+
+<details class="shortcuts-help">
+
+    <summary>Keyboard Shortcuts</summary>
+
+    <p>Numbers: 0–9</p>
+    <p>Calculate: Enter or =</p>
+    <p>Delete last character: Backspace</p>
+    <p>Clear calculator: Escape</p>
+    <p>Operators: +, -, *, /, ^</p>
+
+</details>
 
     </main>
 

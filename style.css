@@ -420,3 +420,213 @@ body.light-theme #graphExpression {
     color: #172337;
     border-color: #cbd5e1;
 }
+
+
+/* =================================
+   EXTRA FEATURES DESIGN
+================================= */
+
+.memory-panel,
+.steps-panel,
+.multi-graph-panel,
+.converter-panel,
+.equation-panel,
+.statistics-panel {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #34465f;
+}
+
+.memory-panel h2,
+.steps-panel h2,
+.multi-graph-panel h2,
+.converter-panel h2,
+.equation-panel h2,
+.statistics-panel h2 {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.memory-controls {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.memory-controls button {
+    padding: 12px 5px;
+    border: none;
+    border-radius: 8px;
+    background: #435b7b;
+    color: white;
+    cursor: pointer;
+}
+
+#memoryStatus {
+    color: #72c7ff;
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+#copyAnswer,
+#showSteps,
+#drawMultipleGraphs,
+#convertUnit,
+#solveEquation,
+#calculateStatistics {
+    padding: 10px 14px;
+    background: #168c78;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#copyStatus {
+    color: #72c7ff;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+#stepsList {
+    margin: 12px 0 0 22px;
+    color: #d5deeb;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.multi-graph-panel p,
+.converter-panel label,
+.equation-panel label,
+.statistics-panel p {
+    color: #aebcd0;
+    font-size: 13px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+#multiGraphExpressions,
+#statisticsInput {
+    width: 100%;
+    min-height: 75px;
+    padding: 12px;
+    background: #101827;
+    color: white;
+    border: 1px solid #506680;
+    border-radius: 8px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+}
+
+#multipleGraphCanvas {
+    width: 100%;
+    min-height: 320px;
+    margin-top: 15px;
+}
+
+.converter-panel input,
+.converter-panel select,
+.equation-panel input {
+    width: 100%;
+    padding: 11px;
+    margin: 5px 0 12px;
+    background: #101827;
+    color: white;
+    border: 1px solid #506680;
+    border-radius: 8px;
+}
+
+#unitResult,
+#equationResult,
+#statisticsResult,
+#multiGraphMessage {
+    color: #72c7ff;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-top: 12px;
+    overflow-wrap: anywhere;
+    white-space: pre-line;
+}
+
+.shortcuts-help {
+    margin-top: 20px;
+    padding: 12px;
+    background: #34465f;
+    color: white;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.shortcuts-help summary {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.shortcuts-help p {
+    margin-top: 10px;
+}
+
+/* Light Mode */
+
+body.light-theme .memory-panel h2,
+body.light-theme .steps-panel h2,
+body.light-theme .multi-graph-panel h2,
+body.light-theme .converter-panel h2,
+body.light-theme .equation-panel h2,
+body.light-theme .statistics-panel h2 {
+    color: #172337;
+}
+
+body.light-theme #stepsList {
+    color: #34465f;
+}
+
+body.light-theme .multi-graph-panel p,
+body.light-theme .converter-panel label,
+body.light-theme .equation-panel label,
+body.light-theme .statistics-panel p {
+    color: #64748b;
+}
+
+body.light-theme #multiGraphExpressions,
+body.light-theme #statisticsInput,
+body.light-theme .converter-panel input,
+body.light-theme .converter-panel select,
+body.light-theme .equation-panel input {
+    background: #edf2f8;
+    color: #172337;
+    border-color: #cbd5e1;
+}
+
+body.light-theme .shortcuts-help {
+    background: #e1e8f0;
+    color: #172337;
+}
+
+body.light-theme .memory-panel,
+body.light-theme .steps-panel,
+body.light-theme .multi-graph-panel,
+body.light-theme .converter-panel,
+body.light-theme .equation-panel,
+body.light-theme .statistics-panel {
+    border-color: #cbd5e1;
+}
+
+/* Small mobile screens */
+
+@media (max-width: 400px) {
+
+    .memory-controls {
+        gap: 5px;
+    }
+
+    .memory-controls button {
+        font-size: 12px;
+    }
+
+    #multipleGraphCanvas {
+        min-height: 260px;
+    }
+}
