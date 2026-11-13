@@ -142,3 +142,157 @@ h1 {
         font-size: 17px;
     }
 }
+
+/* Theme buttons */
+
+.header-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Light theme */
+
+body.light-theme {
+    background: #e9eef5;
+}
+
+body.light-theme .calculator {
+    background: #ffffff;
+}
+
+body.light-theme .topbar h1,
+body.light-theme .history-heading h2 {
+    color: #172337;
+}
+
+body.light-theme .small-title,
+body.light-theme .hint {
+    color: #64748b;
+}
+
+body.light-theme .screen {
+    background: #edf2f8;
+}
+
+body.light-theme .expression {
+    color: #64748b;
+}
+
+body.light-theme .result {
+    color: #172337;
+}
+
+body.light-theme .key {
+    background: #e1e8f0;
+    color: #172337;
+}
+
+body.light-theme .key:hover {
+    background: #cbd5e1;
+}
+
+body.light-theme .key.function {
+    color: #0879bd;
+}
+
+body.light-theme .key.operator {
+    background: #cbdcf0;
+}
+
+body.light-theme .key.utility {
+    background: #f1cbd0;
+    color: #8b2635;
+}
+
+body.light-theme .key.equals {
+    background: #168c78;
+    color: white;
+}
+
+body.light-theme .mode-button {
+    background: #e1e8f0;
+    color: #172337;
+}
+
+body.light-theme .history-item {
+    background: #edf2f8;
+    border-color: #cbd5e1;
+    color: #172337;
+}
+
+body.light-theme .history-item:hover {
+    background: #dce6f1;
+}
+
+body.light-theme .history-expression {
+    color: #64748b;
+}
+
+body.light-theme .history-panel {
+    border-color: #cbd5e1;
+}
+
+body.light-theme .empty-history {
+    color: #64748b;
+}
+
+/* Mobile responsive design */
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+        align-items: flex-start;
+    }
+
+    .calculator {
+        max-width: 100%;
+        padding: 16px;
+        margin-top: 10px;
+    }
+
+    .topbar {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .topbar h1 {
+        font-size: 18px;
+    }
+
+    .header-buttons {
+        gap: 6px;
+    }
+
+    .mode-button {
+        padding: 9px 10px;
+        font-size: 12px;
+    }
+
+    .keypad {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    .key {
+        height: 48px;
+        font-size: 14px;
+    }
+
+    .result {
+        font-size: 25px;
+    }
+
+    .graph-controls {
+        flex-wrap: wrap;
+    }
+
+    #graphExpression {
+        min-width: 0;
+        flex: 1;
+    }
+
+    #graphCanvas {
+        min-height: 260px;
+    }
+}

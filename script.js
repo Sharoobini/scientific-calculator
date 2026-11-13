@@ -206,3 +206,36 @@ document.addEventListener("keydown", function(event) {
 
 // Initial screen
 updateScreen();
+
+// Dark and Light theme
+
+const themeToggle = document.getElementById("themeToggle");
+
+// Load previously saved theme
+let currentTheme =
+    localStorage.getItem("calculatorTheme") || "dark";
+
+function updateTheme() {
+
+    document.body.classList.toggle(
+        "light-theme",
+        currentTheme === "light"
+    );
+
+    themeToggle.textContent =
+        currentTheme === "dark" ? "☀️ Light" : "🌙 Dark";
+}
+
+// Change theme when clicked
+themeToggle.addEventListener("click", function() {
+
+    currentTheme =
+        currentTheme === "dark" ? "light" : "dark";
+
+    localStorage.setItem("calculatorTheme", currentTheme);
+
+    updateTheme();
+});
+
+// Apply saved theme
+updateTheme();
