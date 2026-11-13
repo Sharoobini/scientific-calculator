@@ -239,3 +239,192 @@ themeToggle.addEventListener("click", function() {
 
 // Apply saved theme
 updateTheme();
+
+
+// ===============================
+// GRAPH PLOTTING FEATURE
+// ===============================
+
+const graphExpressionInput =
+    document.getElementById("graphExpression");
+
+const plotGraphButton =
+    document.getElementById("plotGraph");
+
+const graphCanvas =
+    document.getElementById("graphCanvas");
+
+const graphMessage =
+    document.getElementById("graphMessage");
+
+// Allowed mathematical names
+const allowedGraphNames = new Set([
+    "x",
+    "sin",
+    "cos",
+    "tan",
+    "sqrt",
+    "log",
+    "log10",
+    "abs",
+    "exp",
+    "pi",
+    "e"
+]);
+
+// Plot graph when button is clicked
+plotGraphButton.addEventListener("click", function() {
+
+    const input = graphExpressionInput.value.trim();
+
+    graphMessage.textContent = "";
+
+    // Check empty input
+    if (!input) {
+        graphMessage.textContent =
+            "Please enter a mathematical function.";
+        return;
+    }
+
+    // Check allowed characters
+    const validCharacters =
+        /^[0-9xX+\-*/^().,\sA-Za-z]*$/;
+
+    if (!validCharacters.test(input)) {
+        graphMessage.textContent =
+            "Please enter a valid mathematical function.";
+        return;
+    }
+
+    // Check mathematical names
+    const names = input.match(/[A-Za-z]+/g) || [];
+
+    const namesAreAllowed = names.every(name =>
+        allowedGraphNames.has(name.toLowerCase())
+    );
+
+    if (!namesAreAllowed) {
+        graphMessage.textContent =
+            "Unsupported function or variable.";
+        return;
+    }
+
+    try {
+
+        if (typeof Plotly === "undefined") {
+            throw new Error("Plotly library is not loaded.");
+        }
+
+        // Use lowercase x
+        const normalizedInput =
+            input.replace(/\bX\b/g, "x");
+
+        // Compile the mathematical expression once
+        const compiled = math.compile(normalizedInput);
+
+        const xValues = [];
+        const yValues = [];
+
+        // Calculate graph points from -10 to +10
+        for (let i = 0; i <= 400; i++) {
+
+            const x = -10 + i * 0.05;
+
+            const y = compiled.evaluate({
+                x: x
+            });
+
+            xValues.push(x);
+
+            // Skip invalid, infinite or complex values
+            if (
+                typeof y === "number" &&
+                Number.isFinite(y)
+            ) {
+                yValues.push(y);
+            } else {
+                yValues.push(null);
+            }
+        }
+
+        // Select graph colours
+        const isLight =
+            document.body.classList.contains("light-theme");
+
+        const textColor = isLight ? "#172337" : "#ffffff";
+
+        const backgroundColor =
+            isLight ? "#ffffff" : "#101827";
+
+        // Create graph
+        const graphData = [{
+            x: xValues,
+            y: yValues,
+            type: "scatter",
+            mode: "lines",
+            name: "f(x)",
+            line: {
+                color: "#26a69a",
+                width: 3
+            },
+            connectgaps: false
+        }];
+
+        const graphLayout = {
+
+            title: {
+                text: "f(x) = " + normalizedInput,
+                font: {
+                    color: textColor
+                }
+            },
+
+            paper_bgcolor: backgroundColor,
+            plot_bgcolor: backgroundColor,
+
+            font: {
+                color: textColor
+            },
+
+            xaxis: {
+                title: "X Axis",
+                zeroline: true,
+                gridcolor: isLight ? "#dce3eb" : "#34465f"
+            },
+
+            yaxis: {
+                title: "Y Axis",
+                zeroline: true,
+                gridcolor: isLight ? "#dce3eb" : "#34465f"
+            },
+
+            autosize: true,
+            margin: {
+                l: 50,
+                r: 20,
+                t: 55,
+                b: 50
+            }
+        };
+
+        const graphConfig = {
+            responsive: true,
+            displaylogo: false
+        };
+
+        // Display graph
+        Plotly.newPlot(
+            graphCanvas,
+            graphData,
+            graphLayout,
+            graphConfig
+        );
+
+    } catch (error) {
+
+        graphMessage.textContent =
+            "Unable to draw graph. Check your equation.";
+
+        console.error(error);
+    }
+});

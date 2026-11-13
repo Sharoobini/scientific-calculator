@@ -9,10 +9,15 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- Math.js library -->
-    <script src="https://unpkg.com/mathjs@15.2.0/lib/browser/math.js"></script>
 
-    <script src="script.js" defer></script>
+   <!-- Math.js -->
+<script src="https://unpkg.com/mathjs@15.2.0/lib/browser/math.js"></script>
+
+<!-- Plotly.js -->
+<script src="https://cdn.plot.ly/plotly-4.3.0.min.js"></script>
+
+<!-- Your JavaScript -->
+<script src="script.js" defer></script>
 </head>
 
 <body>
@@ -85,6 +90,42 @@
             <button class="key equals" data-action="calculate">=</button>
 
         </section>
+
+
+<!-- Graph Plotting Section -->
+
+<section class="graph-panel">
+
+    <h2>Function Graph</h2>
+
+    <p class="graph-description">
+        Enter a mathematical function using x.
+        Example: x^2
+    </p>
+
+    <div class="graph-controls">
+
+        <label for="graphExpression">f(x) =</label>
+
+        <input
+            type="text"
+            id="graphExpression"
+            value="x^2"
+            placeholder="Enter equation, e.g. x^2"
+            maxlength="100"
+        >
+
+        <button id="plotGraph" type="button">
+            Plot Graph
+        </button>
+
+    </div>
+
+    <p id="graphMessage" role="status"></p>
+
+    <div id="graphCanvas"></div>
+
+</section>
 
         <p class="hint">
             Scientific Calculator | DEG / RAD

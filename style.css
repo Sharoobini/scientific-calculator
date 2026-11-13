@@ -333,3 +333,90 @@ body.light-theme .empty-history {
         justify-content: flex-end;
     }
 }
+
+/* Graph section */
+
+.graph-panel {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid #34465f;
+}
+
+.graph-panel h2 {
+    color: white;
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.graph-description {
+    color: #aebcd0;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.graph-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.graph-controls label {
+    color: white;
+    font-size: 14px;
+}
+
+#graphExpression {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    padding: 11px;
+    background: #101827;
+    color: white;
+    border: 1px solid #506680;
+    border-radius: 8px;
+    outline: none;
+}
+
+#plotGraph {
+    padding: 11px 13px;
+    background: #168c78;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#plotGraph:hover {
+    background: #117361;
+}
+
+#graphMessage {
+    color: #ff9999;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+#graphCanvas {
+    width: 100%;
+    min-height: 320px;
+    margin-top: 12px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Graph colours in Light Mode */
+
+body.light-theme .graph-panel h2,
+body.light-theme .graph-controls label {
+    color: #172337;
+}
+
+body.light-theme .graph-description {
+    color: #64748b;
+}
+
+body.light-theme #graphExpression {
+    background: #edf2f8;
+    color: #172337;
+    border-color: #cbd5e1;
+}
