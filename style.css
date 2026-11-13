@@ -296,3 +296,40 @@ body.light-theme .empty-history {
         min-height: 260px;
     }
 }
+
+/* Tablet support */
+
+@media (min-width: 481px) and (max-width: 768px) {
+
+    body {
+        padding: 20px;
+    }
+
+    .calculator {
+        width: 100%;
+        max-width: 460px;
+    }
+}
+
+/* Extra small mobile support */
+
+@media (max-width: 350px) {
+
+    .calculator {
+        padding: 12px;
+    }
+
+    .keypad {
+        gap: 5px;
+    }
+
+    .key {
+        height: 43px;
+        font-size: 12px;
+    }
+
+    .header-buttons {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
