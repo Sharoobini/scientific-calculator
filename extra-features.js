@@ -372,3 +372,41 @@ solveEquationButton.addEventListener("click", function() {
     }
 
 });
+
+
+// =================================
+// 5. COPY ANSWER
+// =================================
+
+const copyAnswerButton =
+    document.getElementById("copyAnswer");
+
+const copyStatus =
+    document.getElementById("copyStatus");
+
+copyAnswerButton.addEventListener("click", async function() {
+
+    const answer = resultDisplay.textContent.trim();
+
+    if (!answer || answer === "Ready" ||
+        answer.startsWith("Error") ||
+        answer === "Invalid expression") {
+
+        copyStatus.textContent = "Please calculate an answer first.";
+        return;
+    }
+
+    try {
+
+        await navigator.clipboard.writeText(answer);
+
+        copyStatus.textContent = "Answer copied successfully!";
+
+    } catch (error) {
+
+        copyStatus.textContent =
+            "Copy failed. Please check browser permissions.";
+
+    }
+
+});
