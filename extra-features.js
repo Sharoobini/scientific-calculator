@@ -658,3 +658,25 @@ calculateStatisticsButton.addEventListener("click", function() {
         "\nMaximum: " + sorted[count - 1];
 
 });
+
+// 8. KEYBOARD SHORTCUT IMPROVEMENT
+
+// Prevent calculator keyboard shortcuts
+// when the user is typing in another field.
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        const target = event.target;
+
+        const isTypingField =
+            target.matches("input, textarea, select, [contenteditable='true']");
+
+        if (isTypingField) {
+            event.stopImmediatePropagation();
+        }
+
+    },
+    true
+);
