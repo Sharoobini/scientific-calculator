@@ -276,3 +276,99 @@ document.getElementById("convertUnit").addEventListener(
 );
 
 populateUnits();
+
+
+// 4. EQUATION SOLVER
+
+const solveEquationButton =
+    document.getElementById("solveEquation");
+
+const equationResult =
+    document.getElementById("equationResult");
+
+function formatNumber(number) {
+    return Number(number.toFixed(8)).toString();
+}
+
+solveEquationButton.addEventListener("click", function() {
+
+    const a = Number(document.getElementById("coefA").value);
+    const b = Number(document.getElementById("coefB").value);
+    const c = Number(document.getElementById("coefC").value);
+
+    if (![a, b, c].every(Number.isFinite)) {
+        equationResult.textContent = "Enter valid coefficients.";
+        return;
+    }
+
+    // Linear equation: bx + c = 0
+    if (Math.abs(a) < 1e-12) {
+
+        if (Math.abs(b) < 1e-12) {
+
+            equationResult.textContent =
+                Math.abs(c) < 1e-12
+                    ? "Every value of x is a solution."
+                    : "No solution.";
+
+            return;
+        }
+
+        const root = -c / b;
+
+        equationResult.textContent =
+            "Linear equation detected.\n" +
+            "x = -c / b\n" +
+            "x = " + formatNumber(root);
+
+        return;
+    }
+
+    // Quadratic equation
+    const discriminant = b * b - 4 * a * c;
+
+    if (discriminant > 0) {
+
+        const root1 =
+            (-b + Math.sqrt(discriminant)) / (2 * a);
+
+        const root2 =
+            (-b - Math.sqrt(discriminant)) / (2 * a);
+
+        equationResult.textContent =
+            "Discriminant = " + formatNumber(discriminant) +
+            "\nTwo real roots found." +
+            "\nx1 = " + formatNumber(root1) +
+            "\nx2 = " + formatNumber(root2);
+
+    }
+
+    else if (Math.abs(discriminant) < 1e-12) {
+
+        const root = -b / (2 * a);
+
+        equationResult.textContent =
+            "Discriminant = 0" +
+            "\nOne repeated real root." +
+            "\nx = " + formatNumber(root);
+
+    }
+
+    else {
+
+        const realPart = -b / (2 * a);
+
+        const imaginaryPart =
+            Math.sqrt(-discriminant) / (2 * Math.abs(a));
+
+        equationResult.textContent =
+            "Discriminant = " + formatNumber(discriminant) +
+            "\nTwo complex roots found." +
+            "\nx1 = " + formatNumber(realPart) +
+            " + " + formatNumber(imaginaryPart) + "i" +
+            "\nx2 = " + formatNumber(realPart) +
+            " - " + formatNumber(imaginaryPart) + "i";
+
+    }
+
+});
