@@ -373,10 +373,7 @@ solveEquationButton.addEventListener("click", function() {
 
 });
 
-
-// =================================
 // 5. COPY ANSWER
-// =================================
 
 const copyAnswerButton =
     document.getElementById("copyAnswer");
@@ -406,6 +403,155 @@ copyAnswerButton.addEventListener("click", async function() {
 
         copyStatus.textContent =
             "Copy failed. Please check browser permissions.";
+
+    }
+
+});
+
+// 6. MULTIPLE GRAPH PLOTTING
+
+const multipleGraphInput =
+    document.getElementById("multiGraphExpressions");
+
+const drawMultipleGraphsButton =
+    document.getElementById("drawMultipleGraphs");
+
+const multipleGraphCanvas =
+    document.getElementById("multipleGraphCanvas");
+
+const multiGraphMessage =
+    document.getElementById("multiGraphMessage");
+
+const allowedGraphFunctions = new Set([
+    "x", "sin", "cos", "tan",
+    "sqrt", "log", "log10",
+    "abs", "exp", "pi", "e"
+]);
+
+drawMultipleGraphsButton.addEventListener("click", function() {
+
+    multiGraphMessage.textContent = "";
+
+    if (typeof Plotly === "undefined") {
+        multiGraphMessage.textContent =
+            "Plotly library is not available. Check your internet connection.";
+        return;
+    }
+
+    const equations = multipleGraphInput.value
+        .split("\n")
+        .map(item => item.trim())
+        .filter(Boolean);
+
+    if (equations.length === 0) {
+        multiGraphMessage.textContent =
+            "Enter at least one equation.";
+        return;
+    }
+
+    if (equations.length > 5) {
+        multiGraphMessage.textContent =
+            "You can compare a maximum of five equations.";
+        return;
+    }
+
+    try {
+
+        const graphData = [];
+
+        equations.forEach((equation, index) => {
+
+            const normalized =
+                equation.replace(/\bX\b/g, "x");
+
+            if (normalized.length > 100) {
+                throw new Error("Equation is too long.");
+            }
+
+            const validCharacters =
+                /^[0-9x+\-*/^().,\sA-Za-z]*$/;
+
+            if (!validCharacters.test(normalized)) {
+                throw new Error("Invalid characters in equation.");
+            }
+
+            const names = normalized.match(/[A-Za-z]+/g) || [];
+
+            const allowed = names.every(name =>
+                allowedGraphFunctions.has(name.toLowerCase())
+            );
+
+            if (!allowed) {
+                throw new Error("Unsupported function in equation.");
+            }
+
+            const compiled = math.compile(normalized);
+
+            const xValues = [];
+            const yValues = [];
+
+            for (let i = 0; i <= 200; i++) {
+
+                const x = -10 + i * 0.1;
+
+                const y = compiled.evaluate({ x: x });
+
+                xValues.push(x);
+
+                yValues.push(
+                    typeof y === "number" && Number.isFinite(y)
+                        ? y
+                        : null
+                );
+            }
+
+            graphData.push({
+                x: xValues,
+                y: yValues,
+                type: "scatter",
+                mode: "lines",
+                name: "f(x) = " + normalized
+            });
+
+        });
+
+        const isLight =
+            document.body.classList.contains("light-theme");
+
+        Plotly.newPlot(
+            multipleGraphCanvas,
+            graphData,
+            {
+                title: "Function Comparison",
+                paper_bgcolor: isLight ? "#ffffff" : "#101827",
+                plot_bgcolor: isLight ? "#ffffff" : "#101827",
+                font: {
+                    color: isLight ? "#172337" : "#ffffff"
+                },
+                xaxis: {
+                    title: "X Axis"
+                },
+                yaxis: {
+                    title: "Y Axis"
+                },
+                autosize: true,
+                margin: {
+                    l: 45,
+                    r: 15,
+                    t: 50,
+                    b: 45
+                }
+            },
+            {
+                responsive: true,
+                displaylogo: false
+            }
+        );
+
+    } catch (error) {
+
+        multiGraphMessage.textContent =
+            "Unable to draw graphs: " + error.message;
 
     }
 
