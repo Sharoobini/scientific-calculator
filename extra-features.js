@@ -556,3 +556,105 @@ drawMultipleGraphsButton.addEventListener("click", function() {
     }
 
 });
+
+
+// 7. STATISTICS CALCULATOR
+
+const statisticsInput =
+    document.getElementById("statisticsInput");
+
+const calculateStatisticsButton =
+    document.getElementById("calculateStatistics");
+
+const statisticsResult =
+    document.getElementById("statisticsResult");
+
+calculateStatisticsButton.addEventListener("click", function() {
+
+    const rawValues = statisticsInput.value.trim();
+
+    if (!rawValues) {
+        statisticsResult.textContent =
+            "Please enter some numbers.";
+        return;
+    }
+
+    const parts = rawValues.split(/[\s,;]+/);
+
+    const numbers = parts.map(Number);
+
+    if (
+        numbers.some(value => !Number.isFinite(value)) ||
+        numbers.length === 0
+    ) {
+        statisticsResult.textContent =
+            "Please enter valid numbers only.";
+        return;
+    }
+
+    // Sort numbers
+    const sorted = [...numbers].sort((a, b) => a - b);
+
+    // Count
+    const count = sorted.length;
+
+    // Sum
+    const sum = sorted.reduce((total, n) => total + n, 0);
+
+    // Mean
+    const mean = sum / count;
+
+    // Median
+    const middle = Math.floor(count / 2);
+
+    const median = count % 2 === 0
+        ? (sorted[middle - 1] + sorted[middle]) / 2
+        : sorted[middle];
+
+    // Mode
+    const frequency = new Map();
+
+    sorted.forEach(number => {
+        frequency.set(
+            number,
+            (frequency.get(number) || 0) + 1
+        );
+    });
+
+    const highestFrequency = Math.max(
+        ...frequency.values()
+    );
+
+    const modes = [...frequency.entries()]
+        .filter(item => item[1] === highestFrequency)
+        .map(item => item[0]);
+
+    const modeText = highestFrequency === 1
+        ? "No mode"
+        : modes.join(", ");
+
+    // Population variance
+    const variance = numbers.reduce(
+        (total, n) => total + Math.pow(n - mean, 2),
+        0
+    ) / count;
+
+    // Standard deviation
+    const standardDeviation = Math.sqrt(variance);
+
+    // Format result
+    const format = n => Number(n.toFixed(6));
+
+    statisticsResult.textContent =
+        "Count: " + count +
+        "\nSum: " + format(sum) +
+        "\nMean: " + format(mean) +
+        "\nMedian: " + format(median) +
+        "\nMode: " + modeText +
+        "\nPopulation Variance: " + format(variance) +
+        "\nPopulation Standard Deviation: " +
+        format(standardDeviation) +
+        "\nMinimum: " + sorted[0] +
+        "\nMaximum: " + sorted[count - 1];
+
+});
